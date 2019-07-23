@@ -10,10 +10,16 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import vn.com.utopia.R
+import vn.com.utopia.common.RecyclerScrollMoreListener
 import vn.com.utopia.model.entry.ICity
 import vn.com.utopia.model.repository.CityRepository
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RecyclerScrollMoreListener.OnLoadMoreListener {
+    // Load database sync
+    override fun onLoadMore(limit: Int, skip: Int) {
+        mCityViewModel.getCitiesAsync()
+    }
+
     private lateinit var mCityViewModel: CityViewModel
     private lateinit var mCityAdapter: CityRecyclerAdapter
 
@@ -22,9 +28,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // Adapter
         mCityAdapter = CityRecyclerAdapter(this)
+        val layoutManager = LinearLayoutManager(this)
         recyclerCity.apply {
-            layoutManager = LinearLayoutManager(context)
+            this.layoutManager = layoutManager
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+            addOnScrollListener(RecyclerScrollMoreListener(layoutManager, 0, 10, this@MainActivity))
             adapter = mCityAdapter
         }
         // Init ViewModel
@@ -33,15 +41,15 @@ class MainActivity : AppCompatActivity() {
                 return CityViewModel(this@MainActivity.application, CityRepository()) as T
             }
         }).get(CityViewModel::class.java)
-        // Load Cities
-        mCityViewModel.getCitiesAsync()
         // Observer
         mCityViewModel.mCitiesLiveData.observe(this, Observer {
-            showCities(it)
+            showNewCities(it)
         })
+        // Load Cities
+        onLoadMore(10, 0)
     }
 
-    private fun showCities(cities: List<ICity>?) {
-        mCityAdapter.setElements(cities)
+    private fun showNewCities(cities: List<ICity>?) {
+        mCityAdapter.addElements(cities)
     }
 }
