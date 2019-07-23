@@ -5,7 +5,7 @@ package vn.com.utopia.model.entry
  * Copyright © 2017 Ly Ho V. All rights reserved.
  */
 interface ICity {
-    fun getId(): Int
+    fun getId(): String
     fun getCityName(): String
     fun getCountryName(): String
     fun getPopulationTitle(): String

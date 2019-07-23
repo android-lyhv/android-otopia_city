@@ -11,7 +11,7 @@ import java.text.DecimalFormat
  */
 @Entity(tableName = "cities")
 class City : ICity {
-    override fun getId(): Int {
+    override fun getId(): String {
         return cityId
     }
 
@@ -30,7 +30,7 @@ class City : ICity {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
-    var cityId: Int = 0
+    var cityId: String = ""
     @ColumnInfo(name = "city")
     var city: String = ""
     @ColumnInfo(name = "country")

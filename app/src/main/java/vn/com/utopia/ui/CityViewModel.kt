@@ -4,7 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import vn.com.utopia.model.entry.ICity
@@ -19,7 +19,7 @@ class CityViewModel(application: Application, private val iCityRepository: ICity
     val mCitiesLiveData = MutableLiveData<List<ICity>>()
 
     fun getCitiesAsync(offset: Int, limit: Int) {
-        MainScope().launch {
+        GlobalScope.launch {
             val cities = withContext(Dispatchers.Default) { iCityRepository.getCities(offset, limit) }
             mCitiesLiveData.postValue(cities)
         }
