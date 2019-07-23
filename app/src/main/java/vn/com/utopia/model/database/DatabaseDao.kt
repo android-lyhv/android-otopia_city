@@ -4,7 +4,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
-import vn.com.utopia.model.entry.City
+import vn.com.utopia.model.entiies.City
 
 
 /**

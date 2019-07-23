@@ -11,8 +11,9 @@ import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import vn.com.utopia.R
 import vn.com.utopia.common.RecyclerScrollMoreListener
-import vn.com.utopia.model.entry.ICity
+import vn.com.utopia.model.entiies.ICity
 import vn.com.utopia.model.repository.CityRepository
+import vn.com.utopia.viewmodel.CityViewModel
 
 class MainActivity : AppCompatActivity(), RecyclerScrollMoreListener.OnLoadMoreListener {
 
@@ -39,7 +40,10 @@ class MainActivity : AppCompatActivity(), RecyclerScrollMoreListener.OnLoadMoreL
         // Init ViewModel
         mCityViewModel = ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return CityViewModel(this@MainActivity.application, CityRepository(this@MainActivity.application)) as T
+                return CityViewModel(
+                    this@MainActivity.application,
+                    CityRepository(this@MainActivity.application)
+                ) as T
             }
         }).get(CityViewModel::class.java)
         // Observer

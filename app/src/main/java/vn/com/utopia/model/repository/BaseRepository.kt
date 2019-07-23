@@ -2,7 +2,6 @@ package vn.com.utopia.model.repository
 
 import android.app.Application
 import vn.com.utopia.model.database.AppDatabase
-import vn.com.utopia.model.database.AppExecutors
 import vn.com.utopia.model.database.DatabaseDao
 
 
@@ -12,5 +11,4 @@ import vn.com.utopia.model.database.DatabaseDao
  */
 abstract class BaseRepository constructor(application: Application) {
     protected var dataDao: DatabaseDao? = AppDatabase.getDatabase(application)?.dataDao()
-    protected var appExecutors: AppExecutors = AppExecutors()
 }

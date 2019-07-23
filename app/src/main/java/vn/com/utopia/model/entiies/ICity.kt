@@ -1,4 +1,4 @@
-package vn.com.utopia.model.entry
+package vn.com.utopia.model.entiies
 
 /**
  * Created by Ly Ho V. on July 23, 2019

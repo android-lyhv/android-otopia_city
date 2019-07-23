@@ -1,6 +1,6 @@
 package vn.com.utopia.model.repository
 
-import vn.com.utopia.model.entry.City
+import vn.com.utopia.model.entiies.City
 
 /**
  * Created by Ly Ho V. on July 23, 2019

@@ -8,7 +8,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import vn.com.utopia.model.database.AppDatabase
 import vn.com.utopia.model.database.DatabaseDao
-import vn.com.utopia.model.entry.City
+import vn.com.utopia.model.entiies.City
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -24,9 +24,12 @@ class DatabaseTest {
 
     @Before
     fun setup() {
-        databaseDate = AppDatabase.getDatabase(InstrumentationRegistry.getTargetContext())?.dataDao()
+        databaseDate = AppDatabase.getDatabase(InstrumentationRegistry.getTargetContext(), true)?.dataDao()
     }
 
+    /**
+     * Make 272128 cities records
+     */
     @Test
     fun createRecordCity() {
         val cities = ArrayList<City>()

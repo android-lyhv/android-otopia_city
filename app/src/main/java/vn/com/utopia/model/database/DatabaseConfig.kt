@@ -5,4 +5,5 @@
 internal object DatabaseConfig {
     const val DB_SCHEMA_VERSION = 2
     const val DB_NAME = "utopia_cities.db"
+    const val DB_NAME_TEST = "utopia_cities_test.db"
 }

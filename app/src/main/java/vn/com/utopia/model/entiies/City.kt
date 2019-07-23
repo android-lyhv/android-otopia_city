@@ -1,4 +1,4 @@
-package vn.com.utopia.model.entry
+package vn.com.utopia.model.entiies
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity

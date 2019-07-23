@@ -1,7 +1,7 @@
 package vn.com.utopia.model.repository
 
 import android.app.Application
-import vn.com.utopia.model.entry.City
+import vn.com.utopia.model.entiies.City
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -12,10 +12,8 @@ import kotlin.coroutines.suspendCoroutine
 class CityRepository(application: Application) : BaseRepository(application), ICityRepository {
     override suspend fun getCities(offset: Int, limit: Int): List<City> {
         return suspendCoroutine { continuation ->
-            appExecutors.diskIO.execute {
-                val cities = dataDao?.getCities(offset, limit)
-                continuation.resume(cities ?: ArrayList())
-            }
+            val cities = dataDao?.getCities(offset, limit)
+            continuation.resume(cities ?: ArrayList())
         }
     }
 }

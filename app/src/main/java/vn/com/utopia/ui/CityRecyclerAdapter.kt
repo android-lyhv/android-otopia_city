@@ -8,7 +8,7 @@ import android.widget.TextView
 import vn.com.utopia.R
 import vn.com.utopia.common.BaseRecyclerAdapter
 import vn.com.utopia.common.BaseViewHolder
-import vn.com.utopia.model.entry.ICity
+import vn.com.utopia.model.entiies.ICity
 
 
 /**

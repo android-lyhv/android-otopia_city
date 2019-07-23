@@ -1,4 +1,4 @@
-package vn.com.utopia.ui
+package vn.com.utopia.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import vn.com.utopia.model.entry.ICity
+import vn.com.utopia.model.entiies.ICity
 import vn.com.utopia.model.repository.ICityRepository
 
 /**
