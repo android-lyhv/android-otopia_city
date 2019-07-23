@@ -8,7 +8,12 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 /**
  * Created by Ly Ho V. on 08 December 2017
  */
-class RecyclerScrollMoreListener(private val mLayoutManager: RecyclerView.LayoutManager, currentPage: Int, visibleThreshold: Int, private val mLoadMoreListener: OnLoadMoreListener?) : RecyclerView.OnScrollListener() {
+class RecyclerScrollMoreListener(
+    private val mLayoutManager: RecyclerView.LayoutManager,
+    currentPage: Int,
+    visibleThreshold: Int,
+    private val mLoadMoreListener: OnLoadMoreListener?
+) : RecyclerView.OnScrollListener() {
     private var mCurrentPage = 0
     private var mPreviousTotalItemCount = 0
     private var mIsLoading = true
@@ -41,13 +46,13 @@ class RecyclerScrollMoreListener(private val mLayoutManager: RecyclerView.Layout
         if (mLoadMoreListener != null) {
             var lastVisibleItemPosition = 0
             val totalItemCount = mLayoutManager.itemCount
-            if (mLayoutManager is StaggeredGridLayoutManager) {
-                val lastVisibleItemPositions = mLayoutManager.findLastVisibleItemPositions(null)
-                lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions)
-            } else if (mLayoutManager is LinearLayoutManager) {
-                lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition()
-            } else if (mLayoutManager is GridLayoutManager) {
-                lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition()
+            when (mLayoutManager) {
+                is StaggeredGridLayoutManager -> {
+                    val lastVisibleItemPositions = mLayoutManager.findLastVisibleItemPositions(null)
+                    lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions)
+                }
+                is LinearLayoutManager -> lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition()
+                is GridLayoutManager -> lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition()
             }
             if (totalItemCount < mPreviousTotalItemCount) {
                 mCurrentPage = 0
@@ -62,13 +67,13 @@ class RecyclerScrollMoreListener(private val mLayoutManager: RecyclerView.Layout
 
             if (!mIsLoading && lastVisibleItemPosition + mVisibleThreshold > totalItemCount) {
                 mCurrentPage++
-                mLoadMoreListener.onLoadMore(mVisibleThreshold, totalItemCount)
+                mLoadMoreListener.onLoadMore(totalItemCount, mVisibleThreshold)
                 mIsLoading = true
             }
         }
     }
 
     interface OnLoadMoreListener {
-        fun onLoadMore(limit: Int, skip: Int)
+        fun onLoadMore(offset: Int, limit: Int)
     }
 }

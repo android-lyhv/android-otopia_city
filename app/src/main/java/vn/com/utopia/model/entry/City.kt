@@ -4,37 +4,37 @@ import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.support.annotation.NonNull
+import java.text.DecimalFormat
 
 /**
  * Created by Ly Ho V. on April 17, 2018
  */
-@Entity(tableName = "city_table")
+@Entity(tableName = "cities")
 class City : ICity {
     override fun getId(): Int {
         return cityId
     }
 
     override fun getCityName(): String {
-        return name
+        return city
     }
 
-    override fun getCityAddress(): String {
-        return address
+    override fun getCountryName(): String {
+        return country
     }
 
-    override fun getCountTitle(): String {
-        // TODO
-        return ""
+    override fun getPopulationTitle(): String {
+        return DecimalFormat("#,###.##").format(population)
     }
 
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
     var cityId: Int = 0
-    @ColumnInfo(name = "name")
-    var name: String = ""
-    @ColumnInfo(name = "address")
-    var address: String = ""
-    @ColumnInfo(name = "count")
-    var count: Int = 0
+    @ColumnInfo(name = "city")
+    var city: String = ""
+    @ColumnInfo(name = "country")
+    var country: String = ""
+    @ColumnInfo(name = "population")
+    var population: Int = 0
 }

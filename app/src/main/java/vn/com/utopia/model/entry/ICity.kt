@@ -7,6 +7,6 @@ package vn.com.utopia.model.entry
 interface ICity {
     fun getId(): Int
     fun getCityName(): String
-    fun getCityAddress(): String
-    fun getCountTitle(): String
+    fun getCountryName(): String
+    fun getPopulationTitle(): String
 }

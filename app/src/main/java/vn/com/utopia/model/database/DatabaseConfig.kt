@@ -3,6 +3,6 @@
  * Copyright © 2017 Ly Ho V. All rights reserved.
  */
 internal object DatabaseConfig {
-    const val DB_SCHEMA_VERSION = 1
-    const val DB_NAME = "DB_SNAP.db"
+    const val DB_SCHEMA_VERSION = 2
+    const val DB_NAME = "utopia_cities.db"
 }

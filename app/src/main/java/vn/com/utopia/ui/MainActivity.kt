@@ -15,13 +15,14 @@ import vn.com.utopia.model.entry.ICity
 import vn.com.utopia.model.repository.CityRepository
 
 class MainActivity : AppCompatActivity(), RecyclerScrollMoreListener.OnLoadMoreListener {
-    // Load database sync
-    override fun onLoadMore(limit: Int, skip: Int) {
-        mCityViewModel.getCitiesAsync()
-    }
 
     private lateinit var mCityViewModel: CityViewModel
     private lateinit var mCityAdapter: CityRecyclerAdapter
+
+    // Load databases sync
+    override fun onLoadMore(offset: Int, limit: Int) {
+        mCityViewModel.getCitiesAsync(offset, limit)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity(), RecyclerScrollMoreListener.OnLoadMoreL
         // Init ViewModel
         mCityViewModel = ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return CityViewModel(this@MainActivity.application, CityRepository()) as T
+                return CityViewModel(this@MainActivity.application, CityRepository(this@MainActivity.application)) as T
             }
         }).get(CityViewModel::class.java)
         // Observer
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity(), RecyclerScrollMoreListener.OnLoadMoreL
             showNewCities(it)
         })
         // Load Cities
-        onLoadMore(10, 0)
+        onLoadMore(0, 10)
     }
 
     private fun showNewCities(cities: List<ICity>?) {

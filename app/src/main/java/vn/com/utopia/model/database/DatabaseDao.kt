@@ -1,6 +1,8 @@
+package vn.com.utopia.model.database
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 import vn.com.utopia.model.entry.City
+
 
 /**
  * Created by Ly Ho V. on November 22, 2018
@@ -8,6 +10,6 @@ import vn.com.utopia.model.entry.City
  */
 @Dao
 interface DatabaseDao {
-    @Query("SELECT * from city_table")
-    fun getCities(userId: Int?, videoTagId: Int?): List<City>
+    @Query("SELECT * from cities LIMIT :offset, :limit")
+    fun getCities(offset: Int, limit: Int): List<City>
 }

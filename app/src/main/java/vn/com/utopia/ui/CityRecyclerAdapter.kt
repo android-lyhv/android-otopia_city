@@ -27,8 +27,8 @@ class CityRecyclerAdapter(context: Context) : BaseRecyclerAdapter<ICity, CityRec
         override fun onBind() {
             getElement(adapterPosition)?.let {
                 mTvCityName.text = it.getCityName()
-                mTvAddress.text = it.getCityAddress()
-                mTvCount.text = it.getCountTitle()
+                mTvAddress.text = it.getCountryName()
+                mTvCount.text = it.getPopulationTitle()
             }
         }
     }
