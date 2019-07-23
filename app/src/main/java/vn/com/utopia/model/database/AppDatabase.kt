@@ -30,7 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
                         val builder = Room.databaseBuilder(
                             context, AppDatabase::class.java,
                             DatabaseConfig.DB_NAME
-                        )
+                        ).allowMainThreadQueries()
                         return builder.openHelperFactory(AssetSQLiteOpenHelperFactory())
                             .addMigrations(MigrationUtils.MIGRATION_1_2)
                             .build()
